@@ -63,6 +63,45 @@ public class InstantViewingActivity extends AppCompatActivity {
 
 
         //Spinner Action - Rita's Part
+        
+        //Activity_main xml
+        
+        <?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <Spinner
+        android:id="@+id/spinner1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Hello World!"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+//strings.xml
+            <resources>
+    <string name="app_name">My Application</string>
+    
+    <string-array name="numbers">
+        <item>One</item>
+        <item>Two</item>
+        <item>Three</item>
+        <item>Four</item>
+        <item>Five</item>
+    </string-array>
+
+</resources>
+
+        
+//mainActivity.java
+            
         ation;
 
 import android.support.v7.app.AppCompatActivity;
