@@ -6,7 +6,10 @@ import android.os.Bundle;
 import android.widget.CalendarView;
 import android.widget.DatePicker;
 import android.widget.TextView;
-
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
+import android.widget.Toast;
 import java.util.Calendar;
 
 public class InstantViewingActivity extends AppCompatActivity {
@@ -63,23 +66,6 @@ public class InstantViewingActivity extends AppCompatActivity {
 
 
         //Spinner Action - Rita's Part
-        ation;
-
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.Spinner;
-import android.widget.Toast;
-
-
-public class MainActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener{
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
 
         Spinner spinner = findViewById(R.id.spinner1);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.numbers, android.R.layout.simple_spinner_item);
