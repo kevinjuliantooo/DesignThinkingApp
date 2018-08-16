@@ -3,6 +3,7 @@ package com.example.piiik98.designthinkingapp;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.CalendarView;
 import android.widget.DatePicker;
 import android.widget.TextView;
@@ -23,16 +24,17 @@ public class InstantViewingActivity extends AppCompatActivity {
 
     //Step 1: Create list here...
 
+
     /**
      * Must Read For Spinner
      *
-     * Step 1: Create the list containing all time (The interval is every 15 minutes, e.g. 7.00 AM, 7.15 AM, etc)
+     * Step 1: Create the list containing all time (The interval is every 15 minutes, e.g. 7.00 AM, 7.15 AM, etc).
      *
-     * Step 2: Copy all spinner code to Spinner Action
+     * Step 2: Copy all spinner code to Spinner Action.
      *
      * Step 3: Connect the list into the code (This is quite complicated so you can ask me from Facebook, LOL... 😂😂😂)
      *
-     * Step 4: For Testing, you can try to print after the code. You will get the result in command line
+     * Step 4: For Testing, you can try to print after the code. You will get the result in command line.
      *
      * This step is not clear enough. So if there any difficulty you can ask me.
      *
@@ -58,6 +60,7 @@ public class InstantViewingActivity extends AppCompatActivity {
                 year = cYear;
                 month = cMonth;
                 day = cDay;
+                dateChoosed = year + ", " + month + ", "+ day;
                 System.out.println(dateChoosed);
                 UIUpdated();
 
@@ -67,28 +70,16 @@ public class InstantViewingActivity extends AppCompatActivity {
 
         //Spinner Action - Rita's Part
 
-        Spinner spinner = findViewById(R.id.spinner1);
+        Spinner spinner = findViewById(R.id.spinner);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.numbers, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
-        spinner.setOnItemSelectedListener(this);
-    }
-
-    @Override
-    public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
-        String text = adapterView.getItemAtPosition(position).toString();
-        Toast.makeText(adapterView.getContext(), text, Toast.LENGTH_SHORT).show();
-    }
-
-    @Override
-    public void onNothingSelected(AdapterView<?> adapterView) {
 
     }
+
+
         //Step 2 - 4: Add and Modify Code + Get Result
 
-
-
-    }
 
     // 👇👇👇👇👇👇👇👇 ONLY FOR METHOD BELOW 👇👇👇👇👇👇👇👇 //
 
@@ -104,9 +95,8 @@ public class InstantViewingActivity extends AppCompatActivity {
 
         //Update Date
         textView.setText(toString().valueOf("Year: " + year + "Month: " + month + "Day: " + day));
-        dateChoosed = year + ", " + month + ", "+ day;
 
-        //Update Spinner
+
 
     }
 }
