@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "196273991308",
+    "firebase_url": "https://design-thinking-3.firebaseio.com",
+    "project_id": "design-thinking-3",
+    "storage_bucket": "design-thinking-3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:196273991308:android:a5268a7095bb5605",
+        "android_client_info": {
+          "package_name": "com.example.piiik98.designthinkingapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "196273991308-c6hhj1optjhc401iknvcvedcqtj87092.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDHKTRKiLugQ5RIjKjldS6oDUjTU1Wfn2A"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

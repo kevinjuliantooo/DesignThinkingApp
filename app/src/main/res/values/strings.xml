@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">DesignThinkingApp</string>
+    <string name="facebook_app_id">318841065552215</string>
+    <string name="fb_login_protocol_scheme">fb318841065552215</string>
 </resources>
