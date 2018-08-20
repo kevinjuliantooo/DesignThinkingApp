@@ -1,7 +1,6 @@
 package com.example.piiik98.designthinkingapp;
 
 import android.content.Intent;
-import android.nfc.Tag;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -28,16 +27,12 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
-import com.shaishavgandhi.loginbuttons.FacebookButton;
 import com.shaishavgandhi.loginbuttons.GoogleButton;
-import com.facebook.FacebookSdk;
-import com.facebook.appevents.AppEventsLogger;
-
 
 public class LoginActivity extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
-    private TextView emailText, passwordText;
+    private TextView emailText, passwordText, signinText;
     private Button loginButton;
     private GoogleButton googleButton;
     private CallbackManager mCallbackManager;
@@ -53,6 +48,7 @@ public class LoginActivity extends AppCompatActivity {
 
         emailText = findViewById(R.id.emailText);
         passwordText = findViewById(R.id.passwordText);
+        signinText= findViewById(R.id.signinText);
         loginButton = findViewById(R.id.login);
         googleButton = findViewById(R.id.googleButton);
 
@@ -61,6 +57,13 @@ public class LoginActivity extends AppCompatActivity {
         facebookConfiguration();
         googleConfiguration();
 
+
+        signinText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
 
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -212,6 +215,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void updateUI(FirebaseUser currentUser) {
+        System.out.println(currentUser);
     }
 
 }
