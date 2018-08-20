@@ -1,0 +1,41 @@
+package com.example.rita.signup;
+
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
+
+public class signupActivity extends AppCompatActivity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_sign_up);
+    }
+
+    public void onsignupClick (View v){
+        if (v.getId()== R.id.signupbutton) {
+            EditText name = (EditText)findViewById(R.id.name);
+            EditText email = (EditText)findViewById(R.id.email);
+            EditText pnumber = (EditText)findViewById(R.id.Pnumber);
+            EditText pass1 = (EditText)findViewById(R.id.password1);
+            EditText pass2 = (EditText)findViewById(R.id.password2);
+
+
+            String namestr = name.getText().toString();
+            String emailstr = email.getText().toString();
+            String pnumberstr = pnumber.getText().toString();
+            String pass1str = pass1.getText().toString();
+            String pass2str = pass2.getText().toString();
+
+            if (!pass1str.equals (pass2str)){
+                //popup message
+                Toast pass = Toast.makeText(SignUp.this, "Passwords don't match!", Toast.LENGTH_SHORT);
+                pass.show();
+            }
+
+        }
+    }
+}
