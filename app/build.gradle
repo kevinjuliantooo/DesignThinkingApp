@@ -31,6 +31,9 @@ dependencies {
     implementation 'com.shaishavgandhi:login-buttons:1.0.0'
     implementation 'com.facebook.android:facebook-android-sdk:[4,5)'
     implementation 'com.google.android.gms:play-services-auth:15.0.1'
+    implementation 'com.google.firebase:firebase-database:16.0.1'
+    implementation 'com.google.firebase:firebase-storage:16.0.1'
+
 }
 
 apply plugin: 'com.google.gms.google-services'
