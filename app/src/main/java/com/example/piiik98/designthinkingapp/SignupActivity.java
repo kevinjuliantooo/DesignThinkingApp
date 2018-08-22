@@ -42,6 +42,7 @@ public class SignupActivity extends AppCompatActivity {
         pass1 = (EditText)findViewById(R.id.password1);
         pass2 = (EditText)findViewById(R.id.password2);
 
+
     }
 
     public void onStart() {

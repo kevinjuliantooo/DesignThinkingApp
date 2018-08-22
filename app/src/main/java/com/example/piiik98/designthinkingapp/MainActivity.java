@@ -4,6 +4,7 @@ import android.os.Handler;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.ListView;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -17,11 +18,22 @@ public class MainActivity extends AppCompatActivity {
     private final long PERIOD_MS = 5000;
     private ViewPager viewPager;
 
+    private ListView houseList;
+    private int houseImage[] = {};
+    private int bed[] = {};
+    private int bathroom[] = {};
+    private int price[] = {};
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        houseList = (ListView) findViewById(R.id.simpleListView);
+        CustomAdapter customAdapter = new CustomAdapter(getApplicationContext(), houseImage, bed, bathroom, price);
+        houseList.setAdapter(customAdapter);
 
         viewPager = findViewById(R.id.viewpager);
         ImageAdapter adapter = new ImageAdapter(this);

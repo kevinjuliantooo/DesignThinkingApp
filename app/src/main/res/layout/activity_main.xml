@@ -7,11 +7,28 @@
     android:orientation="vertical"
     tools:context=".MainActivity">
 
+    <SearchView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.1" />
+
     <android.support.v4.view.ViewPager
         android:id="@+id/viewpager"
-        android:layout_width="wrap_content"
-        android:layout_height="161dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="3"
         tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="0dp" />
+        tools:layout_editor_absoluteY="0dp">
+
+    </android.support.v4.view.ViewPager>
+
+    <LinearLayout
+        android:id="@+id/houseList"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+    </LinearLayout>
 
 </LinearLayout>

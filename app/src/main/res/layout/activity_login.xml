@@ -5,15 +5,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@drawable/bg"
     tools:context=".LoginActivity">
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/imageView3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="2"
+        android:layout_weight="1"
+        app:srcCompat="@drawable/logo"
         android:layout_marginVertical="20dp"
-        app:srcCompat="@mipmap/ic_launcher" />
+/>
 
     <EditText
         android:id="@+id/emailText"
@@ -24,6 +26,7 @@
         android:ems="10"
         android:hint="Email"
         android:inputType="textEmailAddress"
+        android:textColorHint="#ffffff"
         tools:layout_editor_absoluteX="191dp"
         tools:layout_editor_absoluteY="277dp" />
 
@@ -35,6 +38,7 @@
         android:layout_weight="0.5"
         android:ems="10"
         android:hint="Password"
+        android:textColorHint="#ffffff"
         android:inputType="textPassword"
         tools:layout_editor_absoluteX="191dp"
         tools:layout_editor_absoluteY="390dp" />
@@ -44,10 +48,49 @@
         android:layout_width="match_parent"
         android:layout_height="20dp"
         android:layout_marginHorizontal="120dp"
-        android:layout_marginVertical="20dp"
+        android:layout_marginVertical="10dp"
         android:layout_weight="1"
+        android:background="#ff7675"
         android:gravity="center"
+        android:textColor="#ffffff"
         android:text="Sign In" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_weight="2"
+        >
+
+        <TextView
+            android:id="@+id/tvText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:text="or connect with"
+            android:textColor="#FFFFFF"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="16dp"
+            android:layout_toLeftOf="@id/tvText"
+            android:background="#FFFFFF"
+            />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="16dp"
+            android:layout_toRightOf="@id/tvText"
+            android:background="#FFFFFF"
+            />
+
+    </RelativeLayout>
 
     <com.facebook.login.widget.LoginButton
         android:id="@+id/facebookLogin"
@@ -79,6 +122,7 @@
         android:layout_weight="1"
         android:gravity="center"
         android:text="Do not have an account? Sign Up"
-        android:textAppearance="@style/TextAppearance.AppCompat.Small" />
+        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+        android:textColor="#FFFFFF"/>
 
 </LinearLayout>
