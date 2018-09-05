@@ -19,10 +19,10 @@ public class MainActivity extends AppCompatActivity {
     private ViewPager viewPager;
 
     private ListView houseList;
-    private int houseImage[] = {};
-    private int bed[] = {};
-    private int bathroom[] = {};
-    private int price[] = {};
+    private int houseImage[] = {R.drawable.logo};
+    private String bed[] = {"1"};
+    private String bathroom[] = {"2"};
+    private String price[] = {"3000"};
 
 
 
@@ -31,8 +31,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        houseList = (ListView) findViewById(R.id.simpleListView);
-        CustomAdapter customAdapter = new CustomAdapter(getApplicationContext(), houseImage, bed, bathroom, price);
+        houseList = (ListView) findViewById(R.id.houseList);
+        CustomAdapterForMainActivity customAdapter = new CustomAdapterForMainActivity(getApplicationContext(), houseImage, bed, bathroom, price);
         houseList.setAdapter(customAdapter);
 
         viewPager = findViewById(R.id.viewpager);

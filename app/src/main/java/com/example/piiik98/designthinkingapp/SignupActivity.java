@@ -84,7 +84,7 @@ public class SignupActivity extends AppCompatActivity {
                                 } else {
                                     // If sign in fails, display a message to the user.
                                     Log.w("signup", "createUserWithEmail:failure", task.getException());
-                                    Toast.makeText(SignupActivity.this, "Authentication failed.",
+                                    Toast.makeText(SignupActivity.this, "The password must be 8 character or more",
                                             Toast.LENGTH_SHORT).show();
                                     //updateUI(null);
                                 }
