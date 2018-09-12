@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
@@ -24,6 +25,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
@@ -109,6 +111,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onSuccess(LoginResult loginResult) {
                 Log.d("login", "facebook:onSuccess:" + loginResult);
+                handleFacebookAccessToken(loginResult.getAccessToken());
                 // ... handleFacebookAccessToken(loginResult.getAccessToken());
             }
 
@@ -165,6 +168,7 @@ public class LoginActivity extends AppCompatActivity {
                             Log.d("login", "signInWithCredential:success");
                             FirebaseUser user = mAuth.getCurrentUser();
                             updateUI(user);
+                            goToInstantViewing(user);
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w("login", "signInWithCredential:failure", task.getException());
@@ -186,6 +190,33 @@ public class LoginActivity extends AppCompatActivity {
         updateUI(currentUser);
     }
 
+    private void handleFacebookAccessToken(AccessToken token) {
+        Log.d("login", "handleFacebookAccessToken:" + token);
+
+        AuthCredential credential = FacebookAuthProvider.getCredential(token.getToken());
+        mAuth.signInWithCredential(credential)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            // Sign in success, update UI with the signed-in user's information
+                            Log.d("login", "signInWithCredential:success");
+                            FirebaseUser user = mAuth.getCurrentUser();
+                            updateUI(user);
+                            goToInstantViewing(user);
+                        } else {
+                            // If sign in fails, display a message to the user.
+                            Log.w("login", "signInWithCredential:failure", task.getException());
+                            Toast.makeText(LoginActivity.this, "Authentication failed.",
+                                    Toast.LENGTH_SHORT).show();
+                            updateUI(null);
+                        }
+
+                        // ...
+                    }
+                });
+    }
+
     private void signIn() {
         if (googleButton.isPressed()) {
             Intent signInIntent = mGoogleSignInClient.getSignInIntent();
@@ -200,6 +231,7 @@ public class LoginActivity extends AppCompatActivity {
                                 Log.d("login", "signInWithEmail:success");
                                 FirebaseUser user = mAuth.getCurrentUser();
                                 updateUI(user);
+                                goToInstantViewing(user);
                             } else {
                                 // If sign in fails, display a message to the user.
                                 Log.w("login", "signInWithEmail:failure", task.getException());
@@ -213,6 +245,12 @@ public class LoginActivity extends AppCompatActivity {
                     });
         }
 
+    }
+
+    private void goToInstantViewing(FirebaseUser user) {
+        Intent intent = new Intent(LoginActivity.this, WelcomeActivity.class);
+        intent.putExtra("user", user.getUid());
+        startActivity(intent);
     }
 
     private void updateUI(FirebaseUser currentUser) {

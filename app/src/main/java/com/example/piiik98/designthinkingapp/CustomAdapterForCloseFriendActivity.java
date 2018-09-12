@@ -24,6 +24,7 @@ public class CustomAdapterForCloseFriendActivity extends BaseAdapter {
         this.profileMainLanguage = mainLanguage;
         this.profileSecondaryLanguage = secondaryLanguage;
 
+        layoutInflater = (LayoutInflater.from(applicationContext));
 
     }
     @Override
@@ -50,6 +51,7 @@ public class CustomAdapterForCloseFriendActivity extends BaseAdapter {
         TextView nationality = view.findViewById(R.id.nationality);
         TextView mainLanguage = view.findViewById(R.id.languageText);
         TextView secondaryLanguage = view.findViewById(R.id.secondarylanguageText);
+
         friendProfile.setImageResource(profileImage[i]);
         name.setText(profileName[i]);
         location.setText(profileLocation[i]);
