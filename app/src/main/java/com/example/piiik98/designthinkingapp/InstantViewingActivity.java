@@ -1,9 +1,11 @@
 package com.example.piiik98.designthinkingapp;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.CalendarView;
 import android.widget.DatePicker;
 import android.widget.TextView;
@@ -18,6 +20,7 @@ public class InstantViewingActivity extends AppCompatActivity {
     private CalendarView calendarView;
     private TextView textView;
     private String dateChoosed = "";
+    private Button done;
     private int year;
     private int month;
     private int day;
@@ -49,9 +52,18 @@ public class InstantViewingActivity extends AppCompatActivity {
 
         calendarView = findViewById(R.id.calendarView);
         textView = findViewById(R.id.textView);
+        done = findViewById(R.id.done);
 
         currentDate();          //Set Date of Today
         UIUpdated();            //Update UI
+
+        done.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(InstantViewingActivity.this, MainActivity.class);
+                startActivity(intent);
+            }
+        });
 
         //Calender Action - Kevin's Part
         calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {

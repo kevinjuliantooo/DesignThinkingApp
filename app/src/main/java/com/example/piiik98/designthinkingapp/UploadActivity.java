@@ -107,6 +107,7 @@ public class UploadActivity extends AppCompatActivity {
 
                 DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
                 Date date = new Date();
+                Random random = new Random();
                 final String today = dateFormat.format(date);
 
                 Map data = new HashMap();
@@ -117,7 +118,7 @@ public class UploadActivity extends AppCompatActivity {
                 data.put("price", priceText.getText().toString());
                 data.put("date", today);
 
-                mDatabase.child(String.valueOf(n+1)).setValue(data);
+                mDatabase.child(UID + String.valueOf(random.nextInt(1000))).setValue(data);
 
                 houseImageRef.putFile(imageUri).addOnFailureListener(new OnFailureListener() {
                     @Override
@@ -128,8 +129,8 @@ public class UploadActivity extends AppCompatActivity {
                     @Override
                     public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                         Upload upload = new Upload("imageFrom" + UID + today, taskSnapshot.getMetadata().toString());
-                        String uploadID = mDatabase.push().getKey();
-                        mDatabase.child(uploadID).setValue(upload);
+                        DatabaseReference uploadID = mDatabase.push().child("image");
+                        mDatabase.child(String.valueOf(uploadID)).setValue(upload);
                     }
                 });
 
