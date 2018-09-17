@@ -47,7 +47,9 @@
             android:name=".SignupActivity"
             android:label="@string/title_activity_close_person"
             android:theme="@style/AppTheme" />
-        <activity android:name=".WelcomeActivity"></activity>
+        <activity android:name=".WelcomeActivity" />
+        <activity android:name=".EditProfileActivity" />
+        <activity android:name=".BookActivity"></activity>
     </application>
 
 </manifest>

@@ -24,6 +24,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:gravity="right"
             android:text="Bed"
             android:textColor="@color/colorPrimary" />
 
@@ -40,8 +41,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:gravity="left"
             android:text="Price"
-            android:textColor="@color/colorPrimary"/>
+            android:textColor="@color/colorPrimary" />
     </LinearLayout>
 
 </LinearLayout>

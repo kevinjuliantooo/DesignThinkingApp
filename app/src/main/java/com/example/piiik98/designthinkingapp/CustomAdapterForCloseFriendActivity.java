@@ -8,14 +8,18 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+
 public class CustomAdapterForCloseFriendActivity extends BaseAdapter {
     Context context;
-    int[] profileImage;
-    String[] profileName, profileLocation, profileNationality, profileMainLanguage, profileSecondaryLanguage;
+    String choosenLocation;
+    Boolean choosenNatioality;
+    ArrayList<Integer> profileImage;
+    ArrayList<String> profileName, profileLocation, profileNationality, profileMainLanguage, profileSecondaryLanguage;
     LayoutInflater layoutInflater;
 
 
-    public CustomAdapterForCloseFriendActivity (Context applicationContext, int[] profileImage, String[] profileName, String[] location, String[] nationality, String[] mainLanguage, String[] secondaryLanguage) {
+    public CustomAdapterForCloseFriendActivity (Context applicationContext, ArrayList<Integer> profileImage, ArrayList<String> profileName, ArrayList<String> location, ArrayList<String> nationality, ArrayList<String> mainLanguage, ArrayList<String> secondaryLanguage, String choosenLocation, Boolean choosenNationality) {
         this.context = context;
         this.profileImage = profileImage;
         this.profileName = profileName;
@@ -29,7 +33,7 @@ public class CustomAdapterForCloseFriendActivity extends BaseAdapter {
     }
     @Override
     public int getCount() {
-        return profileImage.length;
+        return profileName.size();
     }
 
     @Override
@@ -52,12 +56,12 @@ public class CustomAdapterForCloseFriendActivity extends BaseAdapter {
         TextView mainLanguage = view.findViewById(R.id.languageText);
         TextView secondaryLanguage = view.findViewById(R.id.secondarylanguageText);
 
-        friendProfile.setImageResource(profileImage[i]);
-        name.setText(profileName[i]);
-        location.setText(profileLocation[i]);
-        nationality.setText(profileNationality[i]);
-        mainLanguage.setText(profileMainLanguage[i]);
-        secondaryLanguage.setText(profileSecondaryLanguage[i]);
+        friendProfile.setImageResource(R.drawable.com_facebook_profile_picture_blank_square);
+        name.setText(profileName.get(i));
+        location.setText(profileLocation.get(i));
+        nationality.setText(profileNationality.get(i));
+        mainLanguage.setText(profileMainLanguage.get(i));
+        secondaryLanguage.setText(profileSecondaryLanguage.get(i));
         return view;
     }
 }

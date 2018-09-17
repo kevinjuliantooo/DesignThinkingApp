@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".EditProfileActivity">
+
+    <ImageView
+        android:id="@+id/profileImage"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="0.8"
+        app:srcCompat="@drawable/com_facebook_profile_picture_blank_square" />
+
+    <EditText
+        android:id="@+id/name"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="0.9"
+        android:ems="10"
+        android:hint="username"
+        android:inputType="textPersonName" />
+
+    <EditText
+        android:id="@+id/email"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="0.9"
+        android:ems="10"
+        android:hint="email"
+        android:inputType="textPersonName" />
+
+    <EditText
+        android:id="@+id/Pnumber"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="0.9"
+        android:ems="10"
+        android:hint="phone number"
+        android:inputType="number" />
+
+    <EditText
+        android:id="@+id/password1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="0.9"
+        android:ems="10"
+        android:hint="password"
+        android:inputType="textPassword" />
+
+    <EditText
+        android:id="@+id/nationality"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="0.9"
+        android:ems="10"
+        android:hint="nationality"
+        android:inputType="none" />
+
+    <EditText
+        android:id="@+id/from"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="0.9"
+        android:ems="10"
+        android:hint="from (Optional)"
+        android:inputType="text" />
+
+    <EditText
+        android:id="@+id/flanguage"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="0.9"
+        android:ems="10"
+        android:hint="first language"
+        android:inputType="text" />
+
+    <EditText
+        android:id="@+id/slanguage"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="0.9"
+        android:ems="10"
+        android:hint="second language"
+        android:inputType="text" />
+
+    <Button
+        android:id="@+id/OKButton"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="0.9"
+        android:text="OK" />
+
+</LinearLayout>

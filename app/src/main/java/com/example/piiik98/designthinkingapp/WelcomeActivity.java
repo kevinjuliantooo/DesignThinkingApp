@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -16,13 +17,16 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 public class WelcomeActivity extends AppCompatActivity {
 
-    private ImageView house, friend;
+    private ImageView house, friend, imageView;
     private TextView usernameText;
     private DatabaseReference mDatabase;
     private Bundle bundle;
+    private Button logoutButton, editButton;
     private FirebaseAuth mAuth;
     private FirebaseUser firebaseUser;
     private String userID;
@@ -35,10 +39,26 @@ public class WelcomeActivity extends AppCompatActivity {
 
         house = findViewById(R.id.house);
         friend = findViewById(R.id.friend);
+        imageView = findViewById(R.id.imageView);
         usernameText = findViewById(R.id.usernameText);
+        logoutButton = findViewById(R.id.logoutButton);
+        editButton = findViewById(R.id.editTextButton);
 
+        mAuth = FirebaseAuth.getInstance();
+        firebaseUser = mAuth.getCurrentUser();
+        userID = firebaseUser.getUid();
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference ref = database.getReference().child("user").child(getIntent().getExtras().getString("user"));
+        DatabaseReference ref = database.getReference().child("user").child(userID);
+
+        final StorageReference imageRef = FirebaseStorage.getInstance().getReference().child("userProfile/" + userID + ".png");
+
+        editButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(WelcomeActivity.this, EditProfileActivity.class);
+                startActivity(intent);
+            }
+        });
 
         ref.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -55,6 +75,7 @@ public class WelcomeActivity extends AppCompatActivity {
 
             }
         });
+
         ref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -72,7 +93,7 @@ public class WelcomeActivity extends AppCompatActivity {
         house.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent =  new Intent (WelcomeActivity.this, InstantViewingActivity.class );
+                Intent intent =  new Intent (WelcomeActivity.this, MainActivity.class );
                 startActivity(intent);
             }
         });

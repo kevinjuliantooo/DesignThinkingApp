@@ -8,15 +8,17 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+
 public class CustomAdapterForMainActivity extends BaseAdapter {
     Context context;
-    int houseImage[];
-    String bedlist[];
-    String bathroomlist[];
-    String pricelist[];
+    ArrayList<Integer> houseImage;
+    ArrayList<String> bedlist;
+    ArrayList<String> bathroomlist;
+    ArrayList<String> pricelist;
     LayoutInflater inflter;
 
-    public CustomAdapterForMainActivity(Context applicationContext, int[] houseImage, String[] bedlist, String[] bathroomlist, String[] pricelist) {
+    public CustomAdapterForMainActivity(Context applicationContext, ArrayList<String> bedlist, ArrayList<String> bathroomlist, ArrayList<String> pricelist) {
         this.context = context;
         this.houseImage = houseImage;
         this.bedlist = bedlist;
@@ -27,7 +29,7 @@ public class CustomAdapterForMainActivity extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return houseImage.length;
+        return bedlist.size();
     }
 
     @Override
@@ -47,10 +49,10 @@ public class CustomAdapterForMainActivity extends BaseAdapter {
         TextView bed = view.findViewById(R.id.bed);
         TextView bathroom = view.findViewById(R.id.bathroom);
         TextView price = view.findViewById(R.id.price);
-        bed.setText(bedlist[i]);
-        bathroom.setText(bathroomlist[i]);
-        price.setText(pricelist[i]);
-        house.setImageResource(houseImage[i]);
+        bed.setText(bedlist.get(i));
+        bathroom.setText(bathroomlist.get(i));
+        price.setText(pricelist.get(i));
+        house.setImageResource(R.drawable.fb_logo);
         return view;
     }
 }
