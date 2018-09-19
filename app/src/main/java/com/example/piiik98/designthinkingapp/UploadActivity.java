@@ -108,17 +108,18 @@ public class UploadActivity extends AppCompatActivity {
                 DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
                 Date date = new Date();
                 Random random = new Random();
+                final String randomNum = String.valueOf(random.nextInt(1000));
                 final String today = dateFormat.format(date);
 
                 Map data = new HashMap();
                 data.put("name", nameText.getText().toString());
                 data.put("location", locationText.getText().toString());
-                data.put("pnumber", bedroomText.getText().toString());
+                data.put("bedroom", bedroomText.getText().toString());
                 data.put("bathroom", bathroomText.getText().toString());
                 data.put("price", priceText.getText().toString());
                 data.put("date", today);
 
-                mDatabase.child(UID + String.valueOf(random.nextInt(1000))).setValue(data);
+                mDatabase.child(UID + randomNum).setValue(data);
 
                 houseImageRef.putFile(imageUri).addOnFailureListener(new OnFailureListener() {
                     @Override
@@ -129,8 +130,8 @@ public class UploadActivity extends AppCompatActivity {
                     @Override
                     public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                         Upload upload = new Upload("imageFrom" + UID + today, taskSnapshot.getMetadata().toString());
-                        DatabaseReference uploadID = mDatabase.push().child("image");
-                        mDatabase.child(String.valueOf(uploadID)).setValue(upload);
+                        String uploadID = mDatabase.push().getKey();
+                        mDatabase.child(UID + randomNum).child("image").child(uploadID).setValue(upload);
                     }
                 });
 

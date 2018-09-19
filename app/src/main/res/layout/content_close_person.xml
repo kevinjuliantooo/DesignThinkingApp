@@ -26,8 +26,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Same Nationality"
-            android:textOff="Language Restriction"
-            android:textOn="Language" />
+            android:textOff="NOT SAME NATIONALITY"
+            android:textOn="SAME NATIONALITY" />
 
     </LinearLayout>
 

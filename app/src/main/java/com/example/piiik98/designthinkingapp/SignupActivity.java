@@ -1,5 +1,6 @@
 package com.example.piiik98.designthinkingapp;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -89,10 +90,13 @@ public class SignupActivity extends AppCompatActivity {
                                     //updateUI(null);
                                 }
 
+
                                 // ...
                             }
                         });
             }
+            Intent intent = new Intent(this, SignupActivity.class);
+            startActivity(intent);
 
         }
     }

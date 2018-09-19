@@ -44,7 +44,7 @@ public class ClosePersonActivity extends AppCompatActivity {
     private FirebaseUser firebaseUser;
     private DatabaseReference ref;
 
-    private String choosedLocation = "Indonesia";
+    private String choosedLocation = "Default";
     private Boolean choosedNationality = false;
     private String userNationality = "";
 
@@ -54,14 +54,14 @@ public class ClosePersonActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_close_person);
-        final String[] select = {"Indonesia", "Malaysia", "Singapore"};
+        final String[] select = {"Default", "Indonesia", "Malaysia", "Singapore"};
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         selectLocation = findViewById(R.id.location);
         selectNationality = findViewById(R.id.nationality);
 
-        selectLocation.setVisibility(View.INVISIBLE);       // Have no way to solve
-        selectNationality.setVisibility(View.INVISIBLE);    // Have no way to solve
+        selectLocation.setVisibility(View.VISIBLE);       // Have no way to solve
+        selectNationality.setVisibility(View.VISIBLE);    // Have no way to solve
 
         mAuth = FirebaseAuth.getInstance();
         firebaseUser = mAuth.getCurrentUser();
@@ -77,6 +77,7 @@ public class ClosePersonActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 userNationality = (String) dataSnapshot.getValue();
+                System.out.println(userNationality);
             }
 
             @Override
@@ -97,6 +98,9 @@ public class ClosePersonActivity extends AppCompatActivity {
                         break;
                     case 2:
                         choosedLocation = select[2];
+                        break;
+                    case 3:
+                        choosedLocation = select[3];
                         break;
                 }
                 updateUI();
@@ -153,13 +157,35 @@ public class ClosePersonActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 CustomAdapterForCloseFriendActivity customAdapterForCloseFriendActivity = new CustomAdapterForCloseFriendActivity(getApplicationContext(), profileImageArray, nameArray, locationArray, nationalityArray, firstLanguageArray, secondaryLanguageArray, choosedLocation, choosedNationality);
-                    for (DataSnapshot ds: dataSnapshot.getChildren()){
+                if (customAdapterForCloseFriendActivity.getCount() != 0){
+                    profileImageArray.clear();
+                    nameArray.clear();
+                    locationArray.clear();
+                    nationalityArray.clear();
+                    firstLanguageArray.clear();
+                    secondaryLanguageArray.clear();
+                }
+                for (DataSnapshot ds: dataSnapshot.getChildren()){
                     User user = dataSnapshot.getValue(User.class);
-                    if (!choosedNationality) {
-                        rowSort(ds);
-                    } else {
-                        if (userNationality == ds.child("nationality").getValue()) {
+                    System.out.println(ds.child("nationality").getValue()); //Contoh Indonesia
+                    if (!choosedNationality) { //Kalo Nationality Off
+                        if (choosedLocation.equals("Default")) {  // Misal kita from ""
                             rowSort(ds);
+                        } else if (choosedLocation.equals(ds.child("location").getValue())) { // Misal lokasi yang kita pilih w/ orang sama
+                            rowSort(ds);
+                        } else {
+                            // Empty
+                        }
+
+                    } else { //Kalo nationality on
+                        if(userNationality.equals(ds.child("nationality").getValue())){
+                            if (choosedLocation.equals("Default")) {
+                                rowSort(ds);
+                            } else if (choosedLocation.equals(ds.child("location").getValue())) { // Misal lokasi yang kita pilih w/ orang sama
+                                rowSort(ds);
+                            } else {
+                                // Empty
+                            }
                         } else {
                             // Empty
                         }

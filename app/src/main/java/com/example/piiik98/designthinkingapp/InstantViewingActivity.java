@@ -13,7 +13,16 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.Toast;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 import java.util.Calendar;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Random;
 
 public class InstantViewingActivity extends AppCompatActivity {
 
@@ -21,9 +30,16 @@ public class InstantViewingActivity extends AppCompatActivity {
     private TextView textView;
     private String dateChoosed = "";
     private Button done;
+    private Spinner spinner;
     private int year;
     private int month;
     private int day;
+    private FirebaseDatabase firebaseDatabase;
+    private DatabaseReference ref;
+    private FirebaseAuth firebaseAuth;
+    private FirebaseUser firebaseUser;
+    private String UID;
+    private String time = "9:00";
 
     //Step 1: Create list here...
 
@@ -53,6 +69,57 @@ public class InstantViewingActivity extends AppCompatActivity {
         calendarView = findViewById(R.id.calendarView);
         textView = findViewById(R.id.textView);
         done = findViewById(R.id.done);
+        spinner = findViewById(R.id.spinner);
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                switch (i){
+                    case 0:
+                        time = "9:00";
+                        break;
+                    case 1:
+                        time = "10:00";
+                        break;
+                    case 2:
+                        time = "11:00";
+                        break;
+                    case 3:
+                        time = "12:00";
+                        break;
+                    case 4:
+                        time = "13:00";
+                        break;
+                    case 5:
+                        time = "14:00";
+                        break;
+                    case 6:
+                        time = "15:00";
+                        break;
+                    case 7:
+                        time = "16:00";
+                        break;
+                    case 8:
+                        time = "17:00";
+                        break;
+                    case 9:
+                        time = "18:00";
+                        break;
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
+        firebaseDatabase = FirebaseDatabase.getInstance();
+        ref = firebaseDatabase.getReference().child("book");
+
+        firebaseAuth = FirebaseAuth.getInstance();
+        firebaseUser = firebaseAuth.getCurrentUser();
+        UID = firebaseUser.getUid();
+
 
         currentDate();          //Set Date of Today
         UIUpdated();            //Update UI
@@ -60,6 +127,19 @@ public class InstantViewingActivity extends AppCompatActivity {
         done.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Random random = new Random();
+                final String randomNum = String.valueOf(random.nextInt(1000));
+
+                Map data = new HashMap();
+                data.put("booker", UID);
+                data.put("owner", getIntent().getExtras().getString("owner"));
+                data.put("day", String.valueOf(day));
+                data.put("year", String.valueOf(year));
+                data.put("month", String.valueOf(month));
+                data.put("time", time);
+
+                ref.child(UID + getIntent().getExtras().getString("owner") + randomNum).setValue(data);
+
                 Intent intent = new Intent(InstantViewingActivity.this, MainActivity.class);
                 startActivity(intent);
             }

@@ -18,7 +18,7 @@ public class CustomAdapterForMainActivity extends BaseAdapter {
     ArrayList<String> pricelist;
     LayoutInflater inflter;
 
-    public CustomAdapterForMainActivity(Context applicationContext, ArrayList<String> bedlist, ArrayList<String> bathroomlist, ArrayList<String> pricelist) {
+    public CustomAdapterForMainActivity(Context applicationContext, ArrayList<Integer> houseImage, ArrayList<String> bedlist, ArrayList<String> bathroomlist, ArrayList<String> pricelist) {
         this.context = context;
         this.houseImage = houseImage;
         this.bedlist = bedlist;
@@ -49,10 +49,10 @@ public class CustomAdapterForMainActivity extends BaseAdapter {
         TextView bed = view.findViewById(R.id.bed);
         TextView bathroom = view.findViewById(R.id.bathroom);
         TextView price = view.findViewById(R.id.price);
-        bed.setText(bedlist.get(i));
-        bathroom.setText(bathroomlist.get(i));
-        price.setText(pricelist.get(i));
-        house.setImageResource(R.drawable.fb_logo);
+        bed.setText("Bedroom: " + bedlist.get(i));
+        bathroom.setText("Bathroom" + bathroomlist.get(i));
+        price.setText("Price: $" + pricelist.get(i));
+        house.setImageResource(houseImage.get(i));
         return view;
     }
 }

@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Spinner;
@@ -23,6 +24,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -91,6 +93,35 @@ public class MainActivity extends AppCompatActivity {
         ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, sortBy);
         spinner.setAdapter(spinnerAdapter);
 
+        houseList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, final int i, long l) {
+                ref.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        int n = 0;
+                        for (DataSnapshot ds: dataSnapshot.getChildren()) {
+                            if (n == i){
+                                n = 0;
+                                String personID = ds.getKey();
+                                System.out.println("to: " + personID);
+                                Intent intent = new Intent(MainActivity.this, BookActivity.class);
+                                intent.putExtra("choosenRow", personID);
+                                startActivity(intent);
+                                break;
+                            }
+                            n += 1;
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
+
+            }
+        });
 
     }
 
@@ -113,50 +144,28 @@ public class MainActivity extends AppCompatActivity {
 //            }
 //        });
 
-
         ref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-
-//                ArrayList<String> groupOfLocationArray = new ArrayList<String>();
-//                ArrayList<String> groupOfBedroomArray = new ArrayList<String>();
+                CustomAdapterForMainActivity customAdapter = new CustomAdapterForMainActivity(getApplicationContext(),houseImage, bed, bathroom, price);
+// info@comfortdelgro.com
+                if (customAdapter.getCount() != 0){
+                    houseImage.clear();
+                    bed.clear();
+                    bathroom.clear();
+                    price.clear();
+                }
 
                 for (DataSnapshot ds : dataSnapshot.getChildren()) {
-                    final ArrayList<ArrayList<Object>> groupOfWholeHouseArray = new ArrayList<>();
-//                    houseData.setName(ds.getValue(HouseData.class).getName());
-//                    houseData.setLocation(ds.child("location").getValue(HouseData.class).getLocation());
-//                    houseData.setBedroom(ds.child("bedroom").getValue(HouseData.class).getBedroom());
-                    ref.addValueEventListener(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                            for (DataSnapshot ds : dataSnapshot.getChildren()) {
-//                                HouseData houseData = dataSnapshot.getValue(HouseData.class);
-                                bed.add((String) ds.child("bathroom").getValue());
-                                bathroom.add((String) ds.child("bedrood").getValue());
-                                price.add((String) ds.child("price").getValue());
-
-                            }
-                            CustomAdapterForMainActivity customAdapter = new CustomAdapterForMainActivity(getApplicationContext(), bed, bathroom, price);
-                            houseList.setAdapter(customAdapter);
-                        }
-
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                        }
-                    });
-                    //System.out.println(houseData.location + houseData.location + houseData.bedroom);
-//                    int houseImage[] = {R.drawable.house1};
-
-
-//                    String houseName[] = {houseData.name};
-//                    String location[] = {houseData.location};
-//                    String bedroom[] = {houseData.bedroom};
-//                    String bathroom = houseData.bathroom;
-//                    String price = houseData.price;
-
-                    //nUpload += 1;
+//                  HouseData houseData = dataSnapshot.getValue(HouseData.class);
+                    houseImage.add(R.drawable.house1);
+                    bed.add((String) ds.child("bedroom").getValue());
+                    bathroom.add((String) ds.child("bathroom").getValue());
+                    price.add((String) ds.child("price").getValue());
                 }
+                houseList.setAdapter(customAdapter);
+
+
             }
 
             @Override

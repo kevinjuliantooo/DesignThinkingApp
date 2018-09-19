@@ -106,6 +106,15 @@ public class WelcomeActivity extends AppCompatActivity {
             }
         });
 
+        logoutButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FirebaseAuth.getInstance().signOut();
+                Intent intent = new Intent(WelcomeActivity.this, LoginActivity.class);
+                startActivity(intent);
+            }
+        });
+
 
 
 //        usernameText.setText("Hello " + mDatabase.child("user").child(bundle.getString("user")).toString());

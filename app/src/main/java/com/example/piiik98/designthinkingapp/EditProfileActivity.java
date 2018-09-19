@@ -58,6 +58,7 @@ public class EditProfileActivity extends AppCompatActivity {
         OKButton = findViewById(R.id.OKButton);
         profileImage = findViewById(R.id.profileImage);
 
+        password1.setVisibility(View.INVISIBLE);
         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
         final DatabaseReference ref = firebaseDatabase.getReference().child("user");
         mAuth = FirebaseAuth.getInstance();
@@ -70,7 +71,7 @@ public class EditProfileActivity extends AppCompatActivity {
                 name.setText((String) dataSnapshot.child("name").getValue());
                 email.setText((String) dataSnapshot.child("email").getValue());
                 pnumber.setText((String) dataSnapshot.child("pnumber").getValue());
-                password1.setText((String) dataSnapshot.child("password").getValue());
+                //password1.setText((String) dataSnapshot.child("password").getValue());
                 nationality.setText((String) dataSnapshot.child("nationality").getValue());
                 from.setText((String) dataSnapshot.child("from").getValue());
                 flanguage.setText((String) dataSnapshot.child("flanguage").getValue());
@@ -90,7 +91,14 @@ public class EditProfileActivity extends AppCompatActivity {
                 Intent intent = new Intent();
                 intent.setType("image/*");
                 intent.setAction(Intent.ACTION_GET_CONTENT);
+                if (intent.getType() != null){
+                    //Nothing Happend
+                } else {
+                    intent.setType("image/download.jpg");
+                    intent.setAction(Intent.ACTION_GET_CONTENT);
+                }
                 startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE);
+
             }
         });
 
@@ -100,7 +108,7 @@ public class EditProfileActivity extends AppCompatActivity {
                 if (name.getText().toString().isEmpty() ||
                         email.getText().toString().isEmpty() ||
                         pnumber.getText().toString().isEmpty() ||
-                        password1.getText().toString().isEmpty() ||
+                        //password1.getText().toString().isEmpty() ||
                         nationality.getText().toString().isEmpty() ||
                         flanguage.getText().toString().isEmpty() ||
                         slanguage.getText().toString().isEmpty()) {
@@ -122,20 +130,23 @@ public class EditProfileActivity extends AppCompatActivity {
                     mDatabase.setValue(data);
                     StorageReference imageRef = FirebaseStorage.getInstance().getReference().child("userProfile/" + UID + ".png");
 
-                    imageRef.putFile(imageUri).addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
+                    if (imageUri != null){
+                        imageRef.putFile(imageUri).addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
 
-                        }
-                    }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                        @Override
-                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                            Upload upload = new Upload("imageFrom " + UID, taskSnapshot.getMetadata().toString());
-                            String uploadID = mDatabase.push().getKey();
-                            mDatabase.child(uploadID).setValue(upload);
-                        }
-                    });
+                            }
+                        }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                            @Override
+                            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                                Upload upload = new Upload("imageFrom " + UID, taskSnapshot.getMetadata().toString());
+                                String uploadID = mDatabase.push().getKey();
+                                mDatabase.child(uploadID).setValue(upload);
+                            }
+                        });
 
+
+                    }
                     Intent intent = new Intent(EditProfileActivity.this, WelcomeActivity.class);
                     startActivity(intent);
                 }

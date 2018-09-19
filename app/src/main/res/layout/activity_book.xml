@@ -1,9 +1,123 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".BookActivity">
 
-</android.support.constraint.ConstraintLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="237dp"
+        android:layout_weight="1"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/imageView4"
+            android:layout_width="244dp"
+            android:layout_height="116dp"
+            android:layout_weight="1"
+            app:srcCompat="@drawable/com_facebook_profile_picture_blank_square" />
+
+        <TextView
+            android:id="@+id/agentName"
+            android:layout_width="223dp"
+            android:layout_height="118dp"
+            android:layout_weight="1"
+            android:gravity="left|center"
+            android:text="Agent: Yishun"
+            android:textAlignment="center"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/imageView5"
+            android:layout_width="wrap_content"
+            android:layout_height="118dp"
+            android:layout_weight="1"
+            app:srcCompat="@drawable/house3" />
+
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/star"
+        android:layout_width="39dp"
+        android:layout_height="39dp"
+        android:layout_gravity="end"
+        android:layout_weight="0.0001"
+        app:srcCompat="@drawable/blank" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="3"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/Bedroom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Bedroom: 2"
+            android:textAllCaps="false"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/Bathroom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Bathroom: 1"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/Price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="end"
+            android:text="Price: 3000$"
+            android:textSize="16sp" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/textView9"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:layout_marginHorizontal="20dp"
+        android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ultrices commodo enim, non tempor elit dictum sit amet. Mauris consequat lacus nec euismod tristique. Nam nibh nisi, consequat ac metus et, finibus tincidunt orci. Nulla facilisi. Nunc tristique vel tellus ut vulputate. Integer efficitur libero id enim varius fermentum. Morbi nibh erat, gravida ac eros a, maximus blandit sapien. Praesent in lacinia nisi. Nulla sollicitudin aliquam libero, a egestas lacus elementum in. Morbi a auctor enim, sed auctor dolor. Nunc venenatis tellus odio, et tincidunt ipsum pharetra sed. Suspendisse id fringilla lacus. Curabitur ornare a est eu vulputate. Aenean in ipsum ante. Sed quis ligula vel dolor tempus tempus." />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="3"
+        android:gravity="bottom"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/Chat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="#ff7675"
+            android:text="Chat"
+            android:textColor="#ffffff"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/book"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="#ff7675"
+            android:text="Book A Viewing"
+            android:textColor="#ffffff"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+</LinearLayout>
